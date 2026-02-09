@@ -1,5 +1,6 @@
 import 'package:bizmate/bindings/general_binding.dart';
 import 'package:bizmate/pages/login.dart';
+import 'package:bizmate/routes/route_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'services/app_service.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: GeneralBinding(),
       home: Login(),
-      getPages: [],
+      getPages: RoutePage.route,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color(0xff00a86b),

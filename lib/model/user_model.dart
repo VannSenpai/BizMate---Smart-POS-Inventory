@@ -4,16 +4,27 @@ class UserModel {
   String id;
   String nama;
   String email;
-  String? role;
-  String photoUrl;
-  final FieldValue? createdAt;
+  String? photoUrl;
+  String business;
+  final dynamic createdAt;
 
   UserModel({
     required this.id,
     required this.email,
     required this.nama,
-    this.role,
-    required this.photoUrl,
+    this.photoUrl,
+    required this.business,
     this.createdAt,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'nama': nama,
+      'email': email,
+      'photoUrl': photoUrl ?? '',
+      'business': business,
+      'createdAt': createdAt,
+    };
+  }
 }
