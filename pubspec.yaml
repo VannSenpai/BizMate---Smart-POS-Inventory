@@ -12,6 +12,11 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.7
+  get: ^4.7.3
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
+  cloud_firestore: ^6.1.2
+  google_sign_in: ^6.2.0
 
 dev_dependencies:
   flutter_test:
@@ -28,11 +33,11 @@ flutter_launcher_icons:
 
 
 flutter_native_splash:
-  color: "#3F51B5"
+  color: "#F9F5F0"
   image: "assets/logo/LogoBizMate.png"
   android_12:
     image: "assets/logo/LogoBizMate.png"
-    color: "#3F51B5"
+    color: "#F9F5F0"
   fullscreen: true
 
 # --- BAGIAN FLUTTER ---
@@ -42,3 +47,8 @@ flutter:
   # Aset Gambar
   assets:
     - assets/logo/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/font/Poppins/Poppins-Regular.ttf
