@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Color(0xFF00A86B), width: 2),
+            borderSide: const BorderSide(color: Color(0xFF00A86B), width: 1.5),
           ),
         ),
       ),

@@ -53,3 +53,7 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/font/Poppins/Poppins-Regular.ttf
+
+    - family: Inter
+      fonts:
+        - asset: assets/font/Inter/static/Inter_18pt-Regular.ttf

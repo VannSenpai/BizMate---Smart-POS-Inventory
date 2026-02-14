@@ -109,7 +109,6 @@ class AuthController extends GetxController {
       Get.snackbar('Gagal', pesanError);
     } catch (error) {
       Get.snackbar('Gagal', 'Terjadi Kesalahan $error');
-      print('error: $error');
     } finally {
       isLoading.value = false;
       isRegis.value = false;
