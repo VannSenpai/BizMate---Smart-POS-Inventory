@@ -72,7 +72,7 @@ class AddProduct extends GetView<AddProductController> {
                         width: 150,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(controller.imageUrl.value),
+                            image: NetworkImage(controller.textImage.text),
                             fit: BoxFit.contain,
                           ),
                           borderRadius: BorderRadius.circular(10),
@@ -83,7 +83,9 @@ class AddProduct extends GetView<AddProductController> {
                           ),
                         ),
                       ),
-                      crossFadeState: controller.imageUrl.value.isEmpty ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                      crossFadeState: controller.textImage.text.isEmpty
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
                       duration: Duration(milliseconds: 1500),
                     ),
 
@@ -103,9 +105,7 @@ class AddProduct extends GetView<AddProductController> {
                     SizedBox(height: 5),
 
                     TextFormField(
-                      onChanged: (newValue) {
-                        controller.imageUrl.value = newValue;
-                      },
+                      controller: controller.textImage,
                       validator: (value) {
                         if (value!.isEmpty || !value.contains('https')) {
                           return 'Url gambar tidak boleh kosong dan harus link';
@@ -357,14 +357,25 @@ class AddProduct extends GetView<AddProductController> {
           child: ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                controller.addProduct(
-                  controller.textSku.text,
-                  controller.textName.text,
-                  controller.textPrice.text,
-                  controller.stok.value,
-                  controller.textDescription.text,
-                  controller.imageUrl.value,
-                );
+                if (controller.isEdit) {
+                  controller.editProduct(
+                    controller.textImage.text,
+                    controller.textName.text,
+                    controller.textDescription.text,
+                    controller.textSku.text,
+                    controller.textPrice.text,
+                    controller.stok.value,
+                  );
+                } else {
+                  controller.addProduct(
+                    controller.textSku.text,
+                    controller.textName.text,
+                    controller.textPrice.text,
+                    controller.stok.value,
+                    controller.textDescription.text,
+                    controller.textImage.text,
+                  );
+                }
               }
             },
             style: ElevatedButton.styleFrom(padding: EdgeInsets.all(15)),

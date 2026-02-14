@@ -10,4 +10,5 @@ class HomeController extends GetxController {
   ];
 
   String today = DateFormat('EEEE, d MMM').format(DateTime.now());
-}
+
+} 

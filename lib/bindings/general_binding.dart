@@ -7,7 +7,7 @@ class GeneralBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(AuthController(), permanent: true);
-    Get.lazyPut(() => InventoryProvider());
-    Get.lazyPut(() => InventoryController());
+    Get.lazyPut(() => InventoryProvider(), fenix: true);
+    Get.lazyPut(() => InventoryController(), fenix: true);
   }
 }
