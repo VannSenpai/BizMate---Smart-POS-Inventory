@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bizmate/controllers/auth_controller.dart';
 import 'package:bizmate/model/inventory_model.dart';
 import 'package:bizmate/providers/inventory_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +15,8 @@ class InventoryController extends GetxController {
   final isLoading = false.obs;
   StreamSubscription<QuerySnapshot>? _streamSubscription;
   final keywordSearch = ''.obs;
+  final _authC = Get.find<AuthController>();
+  String? get userId => _authC.user.value?.uid; 
 
   @override
   void onInit() {
@@ -64,7 +67,7 @@ class InventoryController extends GetxController {
 
       _streamSubscription?.cancel();
 
-      _streamSubscription = _provider.getProducts().listen((event) {
+      _streamSubscription = _provider.getProducts(userId!).listen((event) {
         final List<InventoryModel> loadedMenu = event.docs.map((e) {
           final data = e.data() as Map<String, dynamic>;
 
