@@ -20,7 +20,7 @@ class Inventory extends GetView<InventoryController> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: (){},
             icon: Icon(
               Icons.account_circle_rounded,
               size: 30,
@@ -32,6 +32,21 @@ class Inventory extends GetView<InventoryController> {
       body: Obx(() {
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
+        }
+
+        if(controller.allProduct.isEmpty){
+          return Center(child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.production_quantity_limits, size: 25, color: Colors.grey,),
+              Text('Belum ada Product niihh!!!...', style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey,
+              ),)
+            ],
+          ),);
         }
 
         return CustomScrollView(
@@ -169,6 +184,7 @@ class Inventory extends GetView<InventoryController> {
               delegate: SliverChildBuilderDelegate((context, index) {
                 final data = controller.displayProduct[index];
                 return ListTile(
+                  dense: true,
                   onTap: () {
                     Get.bottomSheet(
                       Container(
@@ -276,7 +292,7 @@ class Inventory extends GetView<InventoryController> {
                         fontSize: 12,
                       ),),
                       SizedBox(height: 5,),
-                      if(data.stok < 5 && data.stok != 0)
+                      if(data.stok <= 5 && data.stok != 0)
                       Container(
                         width: 95,
                         padding: EdgeInsetsGeometry.symmetric(horizontal: 5.0),

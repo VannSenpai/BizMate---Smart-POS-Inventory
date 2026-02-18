@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       getPages: RoutePage.route,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xff00a86b),
+          seedColor: Colors.white,
           primary: Color(0xff00a86b),
           secondary: Color(0xff2D3436),
           onError: Color(0xffFFC107),

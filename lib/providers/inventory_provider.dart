@@ -6,8 +6,8 @@ class InventoryProvider {
     'products',
   );
 
-  Stream<QuerySnapshot<Object?>> getProducts() {
-    return _products.orderBy('createdAt', descending: false).snapshots();
+  Stream<QuerySnapshot<Object?>> getProducts(String userId) {
+    return _products.where('userId', isEqualTo: userId).snapshots();
   }
 
   Future<void> delete(String id) async {
@@ -44,4 +44,6 @@ class InventoryProvider {
       throw Exception('Gagal: terjadi kesalahan $error');
     }
   }
+
+  
 }
