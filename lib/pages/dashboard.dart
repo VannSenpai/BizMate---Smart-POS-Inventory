@@ -1,5 +1,6 @@
 import 'package:bizmate/controllers/auth_controller.dart';
 import 'package:bizmate/controllers/home_controller.dart';
+import 'package:bizmate/utils/format_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -76,32 +77,7 @@ class Dashboard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Rp 12.000',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 23,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Low Stock Items',
-                            style: TextStyle(
-                              color: Color(0xff007E6E),
-                              fontFamily: 'Inter',
-                              fontSize: 13,
-                            ),
-                          ),
-                          Text(
-                            '12',
+                            FormatCurrency.toRupiah(homeC.allPrice),
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: 'Poppins',
@@ -116,135 +92,111 @@ class Dashboard extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 25,),
+              SizedBox(height: 25),
 
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Recent Activities', style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17.5,
-                ),),
+                child: Text(
+                  'Recent Activities',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.5,
+                  ),
+                ),
               ),
 
-              SizedBox(height: 25,),
+              SizedBox(height: 25),
 
-              Expanded(child: ListView(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.receipt_long, color: Colors.blue, size: 28,),
-                    title: Text('Order #1024', style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.bold,
-                    ),),
-                    subtitle: Text('Just now'),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text('+ Rp45.000',
+              Expanded(
+                child: ListView.builder(
+                  itemCount: homeC.allTransaction.length,
+                  itemBuilder: (context, index) {
+                    final data = homeC.allTransaction[index];
+                    return ListTile(
+                      leading: Icon(
+                        Icons.receipt_long,
+                        color: Colors.blue,
+                        size: 28,
+                      ),
+                      title: Text(
+                        'Order #${data.id}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 18,
-                        ),),
-                        Text('Credit Card', style: TextStyle(
-                          fontSize: 12,
-                        ),),
-                      ],
-                    ),
-                  ),
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text('Just now'),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '+ ${FormatCurrency.toRupiah(data.total)}',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text('${data.payment}', style: TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
 
-                  SizedBox(height: 15,),
-
-                  ListTile(
-                    leading: Icon(Icons.receipt_long, color: Colors.blue, size: 28,),
-                    title: Text('Order #1024', style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.bold,
-                    ),),
-                    subtitle: Text('Just now'),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text('+ Rp45.000',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 18,
-                        ),),
-                        Text('Credit Card', style: TextStyle(
-                          fontSize: 12,
-                        ),),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: 15,),
-
-                  ListTile(
-                    leading: Icon(Icons.receipt_long, color: Colors.blue, size: 28,),
-                    title: Text('Order #1024', style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.bold,
-                    ),),
-                    subtitle: Text('Just now'),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text('+ Rp45.000',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 18,
-                        ),),
-                        Text('Credit Card', style: TextStyle(
-                          fontSize: 12,
-                        ),),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: 20,),
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Quick Actions', style: TextStyle(
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Quick Actions',
+                  style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.bold,
                     fontSize: 18.5,
-                  ),),),
+                  ),
+                ),
+              ),
 
-                  SizedBox(height: 5,),
+              SizedBox(height: 5),
 
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        child: Column(
-                          children: [
-                            IconButton(onPressed: (){
-                              Get.toNamed('/add');
-                            }, 
-                            style: IconButton.styleFrom(
-                              backgroundColor: Theme.of(context).colorScheme.primary,
-                              padding: EdgeInsets.all(15.0),
-                              shadowColor: Theme.of(context).colorScheme.primary,
-                            ),
-                            icon: Icon(Icons.add, color: Colors.white, size: 20,)),
-                  
-                            SizedBox(height: 5.0,),
-                  
-                            Text('New Sale', style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w500,
-                            ),)
-                          ],
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    child: Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Get.toNamed('/add');
+                          },
+                          style: IconButton.styleFrom(
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            padding: EdgeInsets.all(15.0),
+                            shadowColor: Theme.of(context).colorScheme.primary,
+                          ),
+                          icon: Icon(Icons.add, color: Colors.white, size: 20),
                         ),
-                      )
-                    ],
+
+                        SizedBox(height: 5.0),
+
+                        Text(
+                          'New Sale',
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
-              ))
+              ),
             ],
           ),
         ),
